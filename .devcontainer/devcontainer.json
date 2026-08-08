@@ -1,0 +1,29 @@
+{
+  "name": "AnzuCloud Kali Desktop",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "forwardPorts": [6080, 5901],
+  "portsAttributes": {
+    "6080": {
+      "label": "Desktop noVNC",
+      "onAutoForward": "notify"
+    },
+    "5901": {
+      "label": "VNC",
+      "onAutoForward": "ignore"
+    }
+  },
+  "remoteEnv": {
+    "VNC_RESOLUTION": "1920x1080",
+    "DISPLAY": ":1"
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "bash .devcontainer/start-desktop.sh",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "32gb"
+  }
+}
