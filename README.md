@@ -1,13 +1,7 @@
 # AnzuCloud Kali Desktop Template
 
-This template creates a Kali Linux desktop environment in GitHub Codespaces.
+Kali Linux XFCE desktop accessible via browser (noVNC on port 6080) or VNC client (port 5901).
 
-## Features
-- XFCE Desktop Environment
-- Firefox browser
-- VNC access on port 5901
-- noVNC web access on port 6080
+**VNC Password:** `anzucloud`
 
-## Connection
-- Web: Port 6080 (noVNC)
-- VNC Client: Port 5901, password: `anzucloud`
+Everything starts automatically via supervisord.
