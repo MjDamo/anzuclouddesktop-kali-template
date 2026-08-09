@@ -1,8 +1,7 @@
 {
   "name": "AnzuCloud Kali Desktop",
   "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
+    "dockerfile": "Dockerfile"
   },
   "forwardPorts": [6080, 5901],
   "portsAttributes": {
@@ -17,9 +16,6 @@
   },
   "remoteUser": "vscode",
   "containerUser": "vscode",
-  "postCreateCommand": "sudo chmod +x /usr/local/bin/start-desktop.sh",
-  "postStartCommand": "/usr/local/bin/start-desktop.sh",
-  "postAttachCommand": {
-    "desktop": "/usr/local/bin/start-desktop.sh"
-  }
+  "postCreateCommand": "bash -c 'echo \"[supervisord]\nnodaemon=true\nlogfile=/tmp/supervisord.log\npidfile=/tmp/supervisord.pid\n\n[program:Xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1920x1080x24\nuser=vscode\nautostart=true\nautorestart=true\npriority=10\n\n[program:xfce4]\ncommand=/usr/bin/xfce4-session\nenvironment=DISPLAY=\\\":1\\\",HOME=\\\"/home/vscode\\\",USER=\\\"vscode\\\"\nuser=vscode\nautostart=true\nautorestart=true\npriority=20\nstartsecs=10\n\n[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -forever -shared -rfbport 5901 -passwdfile /home/vscode/.vnc/passwd\nenvironment=DISPLAY=\\\":1\\\",HOME=\\\"/home/vscode\\\",USER=\\\"vscode\\\"\nuser=vscode\nautostart=true\nautorestart=true\npriority=30\n\n[program:novnc]\ncommand=/usr/bin/websockify --web /usr/share/novnc 6080 localhost:5901\nuser=vscode\nautostart=true\nautorestart=true\npriority=40\" > /etc/supervisor/conf.d/desktop.conf && echo \"Desktop config created\"'",
+  "postStartCommand": "bash -c 'mkdir -p /home/vscode/.vnc && echo anzucloud | vncpasswd -f > /home/vscode/.vnc/passwd && chmod 600 /home/vscode/.vnc/passwd && supervisord -c /etc/supervisor/conf.d/desktop.conf'"
 }
