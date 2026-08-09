@@ -8,7 +8,7 @@
   "portsAttributes": {
     "6080": {
       "label": "Desktop (noVNC)",
-      "onAutoForward": "openBrowser"
+      "onAutoForward": "notify"
     },
     "5901": {
       "label": "VNC",
@@ -17,11 +17,9 @@
   },
   "remoteUser": "vscode",
   "containerUser": "vscode",
-  "postCreateCommand": "echo 'AnzuCloud Kali setup complete'",
-  "postStartCommand": "supervisord -c /etc/supervisor/conf.d/desktop.conf",
-  "customizations": {
-    "vscode": {
-      "extensions": []
-    }
+  "postCreateCommand": "sudo chmod +x /usr/local/bin/start-desktop.sh",
+  "postStartCommand": "/usr/local/bin/start-desktop.sh",
+  "postAttachCommand": {
+    "desktop": "/usr/local/bin/start-desktop.sh"
   }
 }
