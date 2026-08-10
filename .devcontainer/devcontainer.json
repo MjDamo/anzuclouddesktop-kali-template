@@ -7,9 +7,9 @@
       "webPort": "6080",
       "vncPort": "5901",
       "password": "anzucloud"
-    },
-    "ghcr.io/raucha/devcontainer-features/kali:1": {}
+    }
   },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y xfce4-goodies xfce4-terminal firefox mousepad thunar gvfs-backends xarchiver nmap netcat-openbsd tcpdump whois dnsutils gobuster dirb hydra john hashcat sqlmap wireshark aircrack-ng nikto && sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*",
   "forwardPorts": [6080, 5901],
   "portsAttributes": {
     "6080": {
@@ -22,8 +22,11 @@
     }
   },
   "remoteUser": "vscode",
-  "hostRequirements": {
-    "cpus": 2,
-    "memory": "4gb"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
   }
 }
