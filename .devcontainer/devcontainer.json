@@ -1,16 +1,10 @@
 {
   "name": "AnzuCloud Kali Desktop",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "features": {
-    "ghcr.io/devcontainers/features/desktop-lite:1": {
-      "version": "latest",
-      "webPort": "6080",
-      "vncPort": "5901",
-      "password": "anzucloud"
-    }
-  },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y xfce4-goodies xfce4-terminal firefox mousepad thunar gvfs-backends xarchiver nmap netcat-openbsd tcpdump whois dnsutils gobuster dirb hydra john hashcat sqlmap wireshark aircrack-ng nikto && sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*",
-  "forwardPorts": [6080, 5901],
+  "image": "ghcr.io/mjdamo/anzucloud-kali-desktop:latest",
+  "forwardPorts": [
+    6080,
+    5901
+  ],
   "portsAttributes": {
     "6080": {
       "label": "Desktop (noVNC)",
